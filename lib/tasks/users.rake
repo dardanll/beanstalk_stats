@@ -4,19 +4,19 @@ namespace :users do
 
     auth = {username: 'dardanll',
             password: '79aa335abd73db619bbe6edc3d113dd8337b6f33a0197db3a0'}
-    users = []
+
     page_number = 1
     loop do
       response = HTTParty.get("https://scopic.beanstalkapp.com/api/users.json?page=#{page_number}&per_page=30", 
                      :basic_auth => auth)
       response = JSON.parse(response.body)
+      
       puts page_number
       break if response.empty?
-      users << response
       page_number += 1
+      
+      create_users(response)
     end
-
-    create_users(users.flatten)
   end
 end
 

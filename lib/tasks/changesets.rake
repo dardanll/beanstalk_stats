@@ -4,7 +4,6 @@ namespace :changesets do
 
     auth = {username: 'dardanll',
             password: '79aa335abd73db619bbe6edc3d113dd8337b6f33a0197db3a0'}
-    changesets = []
     page_number = 4032
     loop do
       response = HTTParty.get("https://scopic.beanstalkapp.com/api/changesets.json?&page=#{page_number}&per_page=30", 
@@ -15,7 +14,6 @@ namespace :changesets do
       puts page_number
 
       break if response.empty? 
-      changesets << response
       page_number += 1
       create_changesets(response)
     end
