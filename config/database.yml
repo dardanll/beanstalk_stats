@@ -1,0 +1,18 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  username: root
+  password: root
+  timeout: 5000
+
+development:
+  <<: *default
+  database: beanstalk_stats
+
+test:
+  <<: *default
+  database: test_beanstalk_stats
+
+production:
+  <<: *default
+  database: production_beanstalk_stats
